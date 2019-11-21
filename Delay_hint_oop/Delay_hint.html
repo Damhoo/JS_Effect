@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>面向对象版的延时提示框</title>
+<style>
+#small_box {background: blue;width: 40px; height: 40px; float: left;}
+#big_box {background: silver; width: 300px; height: 300px; float: left; margin-left: 20px;display: none;}
+</style>
+<script type="text/javascript">
+window.onload = function () {
+    new DelayHint('small_box', 'big_box');
+};
+
+function DelayHint(SmallBox, BigBox) {
+    var _this = this;
+    this.oSmallBox = document.getElementById(SmallBox);
+    this.oBigBox = document.getElementById(BigBox);
+    this.timer = null;
+
+    this.oSmallBox.onmouseover = this.oBigBox.onmouseover = function () {
+        _this.fnMouseOver(_this.oBigBox);
+    };
+    this.oSmallBox.onmouseout = this.oBigBox.onmouseout = function () {
+        _this.fnMouseOut(_this.oBigBox);
+    };
+}
+
+DelayHint.prototype.fnMouseOver = function (oBigBox) {
+    clearTimeout(this.timer);
+    oBigBox.style.display = 'block';
+};
+DelayHint.prototype.fnMouseOut = function (obj) {
+    var _this = this;
+    this.timer = setTimeout(function () {_this.fnTimeout(obj);}, 500);
+};
+DelayHint.prototype.fnTimeout = function (oBigBox) {
+    oBigBox.style.display = 'none';
+}
+</script>
+</head>
+<body>
+    <div id="small_box"></div>
+    <div id="big_box"></div>
+</body>
+</html>
