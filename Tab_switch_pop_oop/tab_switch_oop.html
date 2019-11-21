@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>面向对象标签页</title>
+<style>
+*{padding: 0;margin: 0;}
+body{background: #444;}
+#tab_switch{max-width: 500px; overflow: hidden; margin: 100px auto 0 auto; border: 1px dotted #aaa;border-radius: .25rem;padding: 20px;}
+.tab_btn{max-width: 300px;}
+.tab_btn input{width: 80px;line-height: 25px;text-align: center;font-size: .81rem;border-radius: .25rem;border: none;border-bottom-left-radius: 0; border-bottom-right-radius: 0;cursor: pointer;}
+.tab_btn input.active{background: orange;color: white;}
+div.tab_content {width: 480px; height: 200px; background: #fff; border-radius: .25rem;display: none;border-top-left-radius: 0;font-size: .9rem; padding: .5rem;}
+</style>
+<script type="text/javascript">
+window.onload = function () {
+    new TabSwitch('tab_switch');
+}
+function TabSwitch(id) {
+    var _this = this;
+    this.oTabSwitch = document.getElementById(id);
+    this.aBtn = this.oTabSwitch.getElementsByTagName('input');
+    this.aTabContent =  this.oTabSwitch.getElementsByTagName('div');
+
+    for (var i = 0; i < this.aBtn.length; i++) {
+        this.aBtn[i].index = i;
+        this.aBtn[i].onclick = function () {
+            _this.fnClick(this);
+        };
+    }
+}
+TabSwitch.prototype.fnClick = function (oBtn) {
+    for (var i = 0; i < this.aBtn.length; i++) {
+        this.aBtn[i].className = '';
+        this.aTabContent[i].style.display = 'none';
+    }
+    oBtn.className = 'active';
+    this.aTabContent[oBtn.index].style.display = 'block';
+};
+</script>
+</head>
+<body>
+<div id="tab_switch">
+    <p class="tab_btn">
+        <input type="button" class="active" value="国内新闻">
+        <input type="button" value="国外新闻">
+        <input type="button" value="娱乐新闻">
+    </p>
+    <div class="tab_content" style="display: block;">国内新闻板块</div>
+    <div class="tab_content">国外新闻板块</div>
+    <div class="tab_content">娱乐新闻板块</div>
+</div>
+</body>
+</html>
