@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>无缝滚动-面向过程</title>
+<link rel="stylesheet" type="text/css" href="roll.css">
+<script type="text/javascript">
+window.onload = function () {
+    var oRollimg = document.getElementById('roll_img');
+    var oUl = oRollimg.getElementsByTagName('ul')[0];
+    var aLi = oUl.getElementsByTagName('li');
+    var oPrev = document.getElementById('prev');
+    var oNext = document.getElementById('next');
+    var timer = null;
+    var speed = 1;
+
+    oUl.innerHTML += oUl.innerHTML;
+    oUl.style.width = aLi[0].offsetWidth*aLi.length+'px';
+    
+    function move() {
+        if (oUl.offsetLeft < -aLi[0].offsetWidth*aLi.length/2) {
+            oUl.style.left = '0';
+        }
+        if (oUl.offsetLeft > 0) {
+            oUl.style.left = -oUl.offsetWidth/2+'px';
+        }
+        oUl.style.left = oUl.offsetLeft+speed+'px';
+    }
+    timer = setInterval(move, 30);
+    oRollimg.onmouseover = function () {
+        clearInterval(timer);
+    };
+    oRollimg.onmouseout = function () {
+        timer = setInterval(move, 30);
+    };
+    oPrev.onclick = function () {
+        speed = -1;
+    };
+    oNext.onclick = function () {
+        speed = 1;
+    };
+};
+</script>
+</head>
+<body>
+<div id="roll">
+    <div class="btn">
+        <a href="javascript:void(0);" id="prev">向左走</a>
+        <a href="javascript:void(0);" id="next">向右走</a>
+    </div>
+    <div id="roll_img">
+        <ul>
+            <li><img src="img/img01.jpg"></li>
+            <li><img src="img/img03.jpg"></li>
+            <li><img src="img/img04.jpg"></li>
+            <li><img src="img/img05.jpg"></li>
+        </ul>
+    </div>
+</div>
+</body>
+</html>

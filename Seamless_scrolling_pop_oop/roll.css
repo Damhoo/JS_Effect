@@ -1,0 +1,11 @@
+@charset "utf-8";
+*{padding: 0;margin: 0;}
+body{background: #444;}
+#roll {max-width: 655px; margin: 100px auto 0 auto; overflow: hidden;}
+#roll_img{border: 5px solid #000; width: 640px; height: 120px; overflow: hidden; position: relative;border-radius: .25rem; margin: 0 auto;}
+#roll_img ul{position: absolute; left: 0; top: 0;}
+#roll_img ul li{list-style: none; width: 160px; height: 120px; float: left;border-right: 5px solid #000;}
+#roll_img ul li img{width: 100%;}
+.btn {max-width: 200px;overflow: hidden;margin: 0 auto 20px auto;}
+.btn a{background: #fff; border-radius: .25rem; width: 80px; line-height: 30px; text-align: center; text-decoration: none;display: inline-block;font-size: .81rem;color: #444;}
+#prev{margin-right: .25rem;}
